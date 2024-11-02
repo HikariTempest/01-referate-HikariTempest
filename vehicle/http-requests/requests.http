@@ -1,0 +1,41 @@
+### GET vehicles
+GET http://localhost:8080/vehicle
+Accept: application/json
+
+### GET vehicle by license plate
+GET http://localhost:8080/vehicle/123
+Accept: application/json
+
+### Send POST request with vehicle json body
+POST http://localhost:8080/vehicle
+Content-Type: application/json
+
+{
+  "licensePlate": "123",
+  "model": "nissan",
+  "color": "blue",
+  "year": 2015
+}
+
+### Send PUT request with vehicle json body
+PUT http://localhost:8080/vehicle
+Content-Type: application/json
+
+{
+  "licensePlate": "123",
+  "model": "Nissan",
+  "color": "red",
+  "year": 2015
+}
+
+### Send Delete request with vehicle json body
+DELETE http://localhost:8080/vehicle
+Content-Type: application/json
+
+{
+  "licensePlate": "123",
+  "model": "Nissan",
+  "color": "red",
+  "year": 2015
+}
+
