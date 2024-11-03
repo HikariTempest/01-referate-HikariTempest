@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appsrv
-          image: ghcr.io/hikaritempest/backend:latest
+          image: ghcr.io/2425-5bhif-wmc/01-referate-hikaritempest:latest
           # remove this when stable. Currently we do not take care of version numbers
           imagePullPolicy: Always
           ports:
