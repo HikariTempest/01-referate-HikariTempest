@@ -43,10 +43,10 @@ jobs:
         run: dir
 
       - name: Build and publish a Docker image
-        uses: macbre/push-to-ghcr@master
+        uses: macbre/push-to-ghcr@v9
         with:
           # every will be "lowercased" internally
-          image_name: ${{ env.REPOSITORY }}
+          image_name: ${{ github.repository }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           image_tag: ${{ env.IMAGE_TAG }}
           dockerfile: ${{ env.DOCKERFILE_LOCATION }}
