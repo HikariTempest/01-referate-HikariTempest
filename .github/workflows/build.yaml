@@ -42,12 +42,14 @@ jobs:
         working-directory: ./vehicle/target
         run: dir
 
-      - name: Build and publish a Docker image
-        uses: macbre/push-to-ghcr@v9
-        with:
-          # every will be "lowercased" internally
-          image_name: ${{ github.repository }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          image_tag: ${{ env.IMAGE_TAG }}
-          dockerfile: ${{ env.DOCKERFILE_LOCATION }}
+      - name: Build Docker image
+        run: docker build --tag ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }} ${{ env.DOCKERFILE_LOCATION }}
 
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push Docker image
+        run: docker push ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }}
+
+
+        
