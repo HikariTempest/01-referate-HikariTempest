@@ -21,7 +21,7 @@ jobs:
     env:
       JAVA_VERSION: '21'
       JAVA_DISTRIBUTION: 'temurin'
-      DOCKERFILE_LOCATION: './vehicle/target/Dockerfile'
+      DOCKERFILE_LOCATION: './vehicle/target/'
       IMAGE_TAG: 'latest'
 
 
@@ -52,7 +52,7 @@ jobs:
           
           docker build --tag ghcr.io/$REPOSITORY:${{ env.IMAGE_TAG }} ${{ env.DOCKERFILE_LOCATION }}
           
-          docker image ls
+          dir
           
           docker push ghcr.io/$REPOSITORY:${{ env.IMAGE_TAG }}
           
