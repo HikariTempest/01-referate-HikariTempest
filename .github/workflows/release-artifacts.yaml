@@ -1,0 +1,42 @@
+name: Release changelog
+run-name: ${{ github.actor }} is releasing the newest changelog.
+on:
+  push:
+    branches: [main]
+jobs:
+  build-and-release-franklyn:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    env:
+      JAVA_VERSION: '21'
+      JAVA_DISTRIBUTION: 'temurin'
+      RUNNER_LOCATION: './vehicle/target/*-runner.jar'
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get the git commits since the last tag
+        run: |
+          git pull --unshallow
+          echo "$(git log $(git describe --tags --abbrev=0)..HEAD | git shortlog)" | sed 's/^ \+/- /'  > release-notes.txt
+          cat release-notes.txt
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+
+      - name: Build vehicle project with maven
+        working-directory: ./vehicle
+        run: mvn clean package
+
+      - name: Release the build
+        run: |
+          tag="$(date +"%Y.%m.%d")-$(git rev-parse --short HEAD)"
+          gh release create $tag \
+            --title "vehicle $tag" \
+            --notes-file release-notes.txt \
+            --prerelease \
+            ${{ env.Runner_LOCATION }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
