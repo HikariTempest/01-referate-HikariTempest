@@ -20,7 +20,6 @@ jobs:
     env:
       JAVA_VERSION: '21'
       JAVA_DISTRIBUTION: 'temurin'
-      DOCKERFILE_LOCATION: './target/Dockerfile'
       IMAGE_TAG: 'latest'
 
     steps:
@@ -35,10 +34,11 @@ jobs:
         run: | # multi line string operator
           cd ./vehicle
           mvn clean package
-          cp src/main/docker/Dockerfile target
+          cp ./src/main/docker/Dockerfile ./target
+          cd ./target
 
       - name: check dir
-        run: dir ./target
+        run: dir
 
       - name: Build and publish a Docker image
         uses: macbre/push-to-ghcr@master
@@ -46,6 +46,5 @@ jobs:
           # every will be "lowercased" internally
           image_name: ${{ github.repository }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          dockerfile: ${{ env.DOCKERFILE_LOCATION }}
           image_tag: ${{ env.IMAGE_TAG }}
 
