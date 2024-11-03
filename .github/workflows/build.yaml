@@ -44,7 +44,7 @@ jobs:
 
       - name: Set lowercase repository name
         id: set-repo-name
-        run: echo "REPOSITORY=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+        run: echo "REPOSITORY=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $REPOSITORY
 
       - name: Build Docker image
         run: docker build --tag ghcr.io/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }} ${{ env.DOCKERFILE_LOCATION }}
