@@ -18,6 +18,7 @@ jobs:
     name: Build vehicle
     runs-on: ubuntu-24.04
     env:
+      REPOSITORY: 'HikariTempest/vehicle'
       JAVA_VERSION: '21'
       JAVA_DISTRIBUTION: 'temurin'
       DOCKERFILE_LOCATION: './vehicle/target/Dockerfile'
@@ -45,7 +46,7 @@ jobs:
         uses: macbre/push-to-ghcr@master
         with:
           # every will be "lowercased" internally
-          image_name: ${{ github.repository }}
+          image_name: ${{ env.REPOSITORY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           image_tag: ${{ env.IMAGE_TAG }}
           dockerfile: ${{ env.DOCKERFILE_LOCATION }}
