@@ -23,7 +23,7 @@ jobs:
       JAVA_DISTRIBUTION: 'temurin'
       DOCKERFILE_LOCATION: './vehicle/target/'
       IMAGE_TAG: 'latest'
-      REPOSITORY: 'HikariTempest/01-referate-HikariTempest'
+      REPOSITORY: 'HikariTempest/'
 
     steps:
       - uses: actions/checkout@v4
