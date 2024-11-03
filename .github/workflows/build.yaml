@@ -49,7 +49,7 @@ jobs:
         run: |
           REPOSITORY=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')
           
-          docker build --tag ghcr.io/$(REPOSITORY):${{ env.IMAGE_TAG }} ${{ env.DOCKERFILE_LOCATION }}
+          docker build --tag ghcr.io/$REPOSITORY:${{ env.IMAGE_TAG }} ${{ env.DOCKERFILE_LOCATION }}
           
-          docker push ghcr.io/$(REPOSITORY):${{ env.IMAGE_TAG }}
+          docker push ghcr.io/$REPOSITORY:${{ env.IMAGE_TAG }}
 
