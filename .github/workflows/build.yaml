@@ -51,5 +51,7 @@ jobs:
           
           docker build --tag ghcr.io/$REPOSITORY:${{ env.IMAGE_TAG }} ${{ env.DOCKERFILE_LOCATION }}
           
+          docker image ls
+          
           docker push ghcr.io/$REPOSITORY:${{ env.IMAGE_TAG }}
-
+          
