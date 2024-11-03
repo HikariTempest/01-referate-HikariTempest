@@ -1,0 +1,51 @@
+name: build vehicle and publish Docker image to ghcr.io
+
+concurrency: production # allow maximum of one running and pending job
+
+on:
+  push:
+    paths:
+      - 'vehicle/**'
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-vehicle-and-docker-publish:
+    name: Build vehicle
+    runs-on: ubuntu-24.04
+    env:
+      JAVA_VERSION: '21'
+      JAVA_DISTRIBUTION: 'temurin'
+      DOCKERFILE_LOCATION: './target/Dockerfile'
+      IMAGE_TAG: 'latest'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: ${{ env.JAVA_DISTRIBUTION }}
+
+      - name: Build vehicle project with maven
+        run: | # multi line string operator
+          cd ./vehicle
+          mvn clean package
+          cp src/main/docker/Dockerfile target
+
+      - name: check dir
+        run: dir ./target
+
+      - name: Build and publish a Docker image
+        uses: macbre/push-to-ghcr@master
+        with:
+          # every will be "lowercased" internally
+          image_name: ${{ github.repository }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dockerfile: ${{ env.DOCKERFILE_LOCATION }}
+          image_tag: ${{ env.IMAGE_TAG }}
+
