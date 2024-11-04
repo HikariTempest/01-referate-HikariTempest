@@ -29,13 +29,21 @@ Dieses Projekt wurde im Rahmen einer Präsentation über GitHub Actions entwicke
 * Release Artifacts
 ** Dieses Skript erstellt ein Prerelease auf GitHub. Dabei werden alle Commits seit dem letzten Release zusammengefasst und mit den Commit-Nachrichten sowie dem `.jar`-Artefakt der Maven-Java-Anwendung veröffentlicht.
 
+=== GitHub Actions Pipeline des Projektes
 
-== Gebrauch
+image::https://www.plantuml.com/plantuml/png/jLBBRi8m4BpxAqQ-fuSU4KByYh4tmSMFrDu5eOf_BoQXLLHHUkd5zixEoBDZRokRmXA32jGpEAFuOSzmlf1bdvDAsH46puN6Z0y5z3uGzCkREHeDKs6l17MPU7edFZYDzLfsabWscyOOzfNAaSfD3hmB2Srdm0oK63R7qGTQOAEn1pCiCQRA2q2FKlVDjylsG0M51b-vdFMDTVaovcWC-Vp8MVVwBzwcI-7ZjKPVSdpcib3CJDqSLw1iGvOVUKwiHQOt-LYoa-dLBiesf0lTvkuVA-X4frP6pyW9qVYarRtTNQdtiUQzOTDORMdLBta_xA0hJVWy3Apc3uIJgQXYBTNQIz3g3-B9_tS2MqfEOlW4[]
+
+=== Getting Started
+
+<<./getting-started.adoc#, Getting Started>>
+
+
+== Gebrauch von GitHub Actions
 
 GitHub Actions ist ein CI/CD-Tool, das automatisierte Workflows direkt in GitHub ermöglicht, um Entwicklungsprozesse wie Tests, Builds und Bereitstellungen zu beschleunigen und zu zentralisieren. Ohne GitHub Actions sind diese Prozesse oft manuell und fehleranfälliger, was mehr Zeit und Ressourcen beansprucht.
 
 
-== CI/CD
+== Was ist CI/CD?
 
 image::ci-cd-cd-atlassian.png[]
 
@@ -65,11 +73,6 @@ image::cicd-pipeline.png[]
 === Kriterienkatalog: GitHub Actions vs. Jenkins, Azure Pipelines und CircleCI
 
 image::criteria-catalog.png[]
-
-
-== GitHub Actions Pipeline des Projektes
-
-image::https://www.plantuml.com/plantuml/png/jLBBRi8m4BpxAqQ-fuSU4KByYh4tmSMFrDu5eOf_BoQXLLHHUkd5zixEoBDZRokRmXA32jGpEAFuOSzmlf1bdvDAsH46puN6Z0y5z3uGzCkREHeDKs6l17MPU7edFZYDzLfsabWscyOOzfNAaSfD3hmB2Srdm0oK63R7qGTQOAEn1pCiCQRA2q2FKlVDjylsG0M51b-vdFMDTVaovcWC-Vp8MVVwBzwcI-7ZjKPVSdpcib3CJDqSLw1iGvOVUKwiHQOt-LYoa-dLBiesf0lTvkuVA-X4frP6pyW9qVYarRtTNQdtiUQzOTDORMdLBta_xA0hJVWy3Apc3uIJgQXYBTNQIz3g3-B9_tS2MqfEOlW4[]
 
 == Quellen
 
