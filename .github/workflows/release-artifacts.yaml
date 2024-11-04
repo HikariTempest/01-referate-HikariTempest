@@ -37,6 +37,6 @@ jobs:
             --title "vehicle $tag" \
             --notes-file release-notes.txt \
             --prerelease \
-            ${{ env.Runner_LOCATION }}
+            ${{ env.RUNNER_LOCATION }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
