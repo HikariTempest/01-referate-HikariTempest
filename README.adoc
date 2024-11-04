@@ -1,4 +1,4 @@
-= GitHub Actions Intro
+= GitHub Actions Deployment
 Arwed Schnalzenberger
 1.0.0, {docdate}
 :imagesdir: img
@@ -19,19 +19,21 @@ endif::[]
 
 == Übersicht
 
+Dieses Projekt wurde im Rahmen einer Präsentation über GitHub Actions entwickelt und enthält drei von mir erstellte GitHub Action-Skripte sowie Erläuterungen zu deren Funktionsweise und Einsatz.
 
+=== Enthaltene Skripte
 
-== Gebrauch
+* Build
+** Dieses Skript erstellt ein Docker-Image aus einem kleinen Maven-Java-Projekt und pusht das fertige Image in die Container Registry "ghcr.io".
+* Deploy
+** Hier wird das zuvor erstellte Image in einer Kubernetes-Umgebung aktualisiert. Die Bereitstellung erfolgt mittels `kubectl` und einer in den GitHub Secrets gespeicherten `kubectl`-Konfigurationsdatei.
+* Release Artifacts
+** Dieses Skript erstellt ein Prerelease auf GitHub. Dabei werden alle Commits seit dem letzten Release zusammengefasst und mit den Commit-Nachrichten sowie dem `.jar`-Artefakt der Maven-Java-Anwendung veröffentlicht.
 
-=== Ohne GitHub Actions
+=== Weitere Dokumentation
 
+Die vollständige Dokumentation zu diesem Projekt ist auf GitHub Pages verfügbar:
+https://2425-5bhif-wmc.github.io/01-referate-HikariTempest/
 
-=== Mit GitHub Actions
-
-
-== Alternativen
-
-
-== Quellen
 
 
