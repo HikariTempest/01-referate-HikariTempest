@@ -58,6 +58,54 @@ image::cicd-pipeline.png[]
 
 == Alternativen
 
+* Azure Pipelines
+* Jenkins
+* Circle CI
+
+=== Kriterienkatalog: GitHub Actions vs. Jenkins, Azure Pipelines und CircleCI
+
+[cols="1,3,3,3,3", options="header"]
+|===
+| Kriterium       | GitHub Actions | Jenkins         | Azure Pipelines | CircleCI
+
+| Nahtlose Integration
+| x
+| o
+| o
+| o
+
+| Einfache Workflow-Definition
+| x
+| o
+| o
+| o
+
+| Kosteneffizienz
+| x
+| o
+| x
+| o
+
+| Umfangreiche Marketplace-Ressourcen
+| x
+| o
+| o
+| x
+
+| Skalierbarkeit und Wartungsfreundlichkeit
+| x
+| o
+| o
+| o
+
+| Integrierte Sicherheitsfeatures
+| x
+| o
+| x
+| o
+
+|===
+
 
 == GitHub Actions Pipeline des Projektes
 
