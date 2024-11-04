@@ -16,20 +16,51 @@ ifdef::env-GitHub[]
 :warning-caption: :warning:
 endif::[]
 
-
 == Übersicht
 
+Dieses Projekt wurde im Rahmen einer Präsentation über GitHub Actions entwickelt und enthält drei von mir erstellte GitHub Action-Skripte sowie Erläuterungen zu deren Funktionsweise und Einsatz.
+
+=== Enthaltene Skripte
+
+* Build
+** Dieses Skript erstellt ein Docker-Image aus einem kleinen Maven-Java-Projekt und pusht das fertige Image in die Container Registry "ghcr.io".
+* Deploy
+** Hier wird das zuvor erstellte Image in einer Kubernetes-Umgebung aktualisiert. Die Bereitstellung erfolgt mittels `kubectl` und einer in den GitHub Secrets gespeicherten `kubectl`-Konfigurationsdatei.
+* Release Artifacts
+** Dieses Skript erstellt ein Prerelease auf GitHub. Dabei werden alle Commits seit dem letzten Release zusammengefasst und mit den Commit-Nachrichten sowie dem `.jar`-Artefakt der Maven-Java-Anwendung veröffentlicht.
 
 
 == Gebrauch
 
-=== Ohne GitHub Actions
+GitHub Actions ist ein CI/CD-Tool, das automatisierte Workflows direkt in GitHub ermöglicht, um Entwicklungsprozesse wie Tests, Builds und Bereitstellungen zu beschleunigen und zu zentralisieren. Ohne GitHub Actions sind diese Prozesse oft manuell und fehleranfälliger, was mehr Zeit und Ressourcen beansprucht.
 
 
-=== Mit GitHub Actions
+== CI/CD
+
+image::ci-cd-cd-atlassian.png[]
+
+=== Continuous Integration (CI)
+
+Entwickler integrieren häufig ihre Änderungen in den Hauptzweig, wodurch Builds und Tests automatisch laufen. So werden Integrationsprobleme frühzeitig vermieden.
+
+=== Continuous Delivery (CD)
+
+Auf CI aufbauend, stellt CD sicher, dass alle Änderungen nach dem Build automatisch in eine Test- oder Produktionsumgebung gelangen und bei Bedarf jederzeit veröffentlicht werden können.
+
+=== Continuous Deployment
+
+Jede Änderung, die alle Tests besteht, wird ohne menschliches Eingreifen direkt für die Nutzer bereitgestellt, was schnelle Feedback-Schleifen ermöglicht.
+
+=== CI/CD Pipeline
+
+image::cicd-pipeline.png[]
 
 
 == Alternativen
+
+
+== GitHub Actions Pipeline des Projektes
+
 
 
 == Quellen
