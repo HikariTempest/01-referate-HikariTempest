@@ -69,8 +69,25 @@ image::criteria-catalog.png[]
 
 == GitHub Actions Pipeline des Projektes
 
-
+image::https://www.plantuml.com/plantuml/png/jLBBRi8m4BpxAqQ-fuSU4KByYh4tmSMFrDu5eOf_BoQXLLHHUkd5zixEoBDZRokRmXA32jGpEAFuOSzmlf1bdvDAsH46puN6Z0y5z3uGzCkREHeDKs6l17MPU7edFZYDzLfsabWscyOOzfNAaSfD3hmB2Srdm0oK63R7qGTQOAEn1pCiCQRA2q2FKlVDjylsG0M51b-vdFMDTVaovcWC-Vp8MVVwBzwcI-7ZjKPVSdpcib3CJDqSLw1iGvOVUKwiHQOt-LYoa-dLBiesf0lTvkuVA-X4frP6pyW9qVYarRtTNQdtiUQzOTDORMdLBta_xA0hJVWy3Apc3uIJgQXYBTNQIz3g3-B9_tS2MqfEOlW4[]
 
 == Quellen
+
+* Docker. Dockerignore-Dateien: https://docs.docker.com/build/concepts/context/#dockerignore-files
+* Quarkus-Seminar. 2024 Lab Minikube: https://quarkus-seminar.github.io/2024-lab-minikube/
+* HTL Leonding. Docker Vorlesungsnotizen: https://htl-leonding-college.github.io/docker-lecture-notes/
+* HTL Leonding. Quarkus JAR GitHub Actions Demo: https://htl-leonding-college.github.io/quarkus-jar-gh-actions-demo/
+* HTL Leonding. Quarkus JAR GitHub Actions Demo (GitHub Actions): https://htl-leonding-college.github.io/quarkus-jar-gh-actions-demo/gh-actions.html
+* HTL Leonding. Git Vorlesungsnotizen: https://htl-leonding-college.github.io/git-lecture-notes/
+* Baeldung. Maven Wrapper: https://www.baeldung.com/maven-wrapper
+* GitHub Docs. Arbeiten mit einem Container-Registry: https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
+* GitHub Docs. Webhook-Events und Payloads: https://docs.github.com/en/webhooks/webhook-events-and-payloads#workflow_dispatch
+* GitHub Docs. Workflow-Steuerung: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs
+* GitHub Marketplace. Push to GitHub Container Registry: https://github.com/marketplace/actions/push-to-ghcr
+* GitHub CLI. Release erstellen: https://cli.github.com/manual/gh_release_create
+* Stack Overflow. Fehler: permission denied (write package): https://stackoverflow.com/questions/69014742/github-denied-permission-denied-write-package
+* Atlassian. Kontinuierliche Integration vs. Lieferung vs. Bereitstellung: https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment
+* Medium. CI/CD-Tools im Vergleich: https://medium.com/@meerzoheb/ci-cd-tools-showdown-azure-devops-vs-circleci-vs-github-actions-vs-jenkins-f79353752750
+* PlantUML: https://plantuml.com
 
 

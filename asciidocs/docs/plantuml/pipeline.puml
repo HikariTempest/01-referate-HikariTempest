@@ -1,0 +1,31 @@
+@startuml
+left to right direction
+node gitrepo {
+  file ".java" as code
+}
+node "build" <<ubuntu>> as ghserver {
+    queue {
+      agent compile
+      agent package
+      agent test
+      agent "push to docker registry"
+    }
+}
+node "deploy" <<ubuntu>> as ghserver-2 {
+    queue {
+      agent compile
+      agent package
+      agent test
+      agent "deploy image from docker registry"
+    }
+}
+node "remote-server leocloud" <<ubuntu>> as remoteserver {
+    node production
+}
+code -l-> compile : "new commit on main"
+compile --> package
+package --> test
+test --> "push to docker registry"
+"push to docker registry" -r-> "deploy image from docker registry" : "build was successful"
+"deploy image from docker registry" --> production
+@enduml
