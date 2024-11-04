@@ -1,3 +1,4 @@
+[#_github_actions_intro__getting_started]
 = GitHub Actions Intro - Getting started
 Arwed Schnalzenberger
 1.0.0, {docdate}

@@ -35,8 +35,7 @@ image::https://www.plantuml.com/plantuml/png/jLBBRi8m4BpxAqQ-fuSU4KByYh4tmSMFrDu
 
 === Getting Started
 
-<<./getting-started.adoc#, Getting Started>>
-
+<<./getting-started.adoc#_github_actions_intro__getting_started,Getting Started>>
 
 == Gebrauch von GitHub Actions
 
