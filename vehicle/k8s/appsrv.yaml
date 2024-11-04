@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: appsrv
-          image: ghcr.io/2425-5bhif-wmc/01-referate-hikaritempest:latest
+          image: ghcr.io/hikaritempest/01-referate-hikaritempest:latest
           # remove this when stable. Currently we do not take care of version numbers
           imagePullPolicy: Always
           ports:
@@ -44,12 +44,31 @@ apiVersion: v1
 kind: Service
 metadata:
   name: appsrv
-
 spec:
-  ports:
-    - port: 8080
-      targetPort: 8080
-      protocol: TCP
   selector:
     app: appsrv
-
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: appsrv-ingress
+  # annotations:
+    # if the exposed path doesn't match backend path
+    # INGRESS.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: if200112.cloud.htl-leonding.ac.at
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: appsrv
+                port:
+                  number: 8080
