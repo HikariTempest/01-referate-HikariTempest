@@ -18,6 +18,8 @@ jobs:
   build-vehicle-and-docker-publish:
     name: Build vehicle
     runs-on: ubuntu-24.04
+    permissions:
+      packages: write
     env:
       JAVA_VERSION: '21'
       JAVA_DISTRIBUTION: 'temurin'
