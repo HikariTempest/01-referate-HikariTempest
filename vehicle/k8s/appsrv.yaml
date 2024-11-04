@@ -56,7 +56,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: appsrv-ingress
-  # annotations:
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS, DELETE"
     # if the exposed path doesn't match backend path
     # INGRESS.kubernetes.io/rewrite-target: /
 spec:
