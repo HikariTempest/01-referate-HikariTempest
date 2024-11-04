@@ -1,15 +1,17 @@
-// https://if200112.cloud.htl-leonding.ac.at
+@host = http://localhost:8080/
+//@host = https://if200112.cloud.htl-leonding.ac.at/
+
 
 ### GET vehicles
-GET http://localhost:8080/vehicle
+GET {{host}}/vehicle
 Accept: application/json
 
 ### GET vehicle by license plate
-GET http://localhost:8080/vehicle/123
+GET {{host}}/vehicle/123
 Accept: application/json
 
 ### Send POST request with vehicle json body
-POST http://localhost:8080/vehicle
+POST {{host}}/vehicle
 Content-Type: application/json
 
 {
@@ -20,7 +22,7 @@ Content-Type: application/json
 }
 
 ### Send PUT request with vehicle json body
-PUT http://localhost:8080/vehicle
+PUT {{host}}/vehicle
 Content-Type: application/json
 
 {
@@ -31,7 +33,7 @@ Content-Type: application/json
 }
 
 ### Send Delete request with vehicle json body
-DELETE http://localhost:8080/vehicle
+DELETE {{host}}/vehicle
 Content-Type: application/json
 
 {
