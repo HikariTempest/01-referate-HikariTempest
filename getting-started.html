@@ -436,6 +436,120 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
+pre.rouge table td { padding: 5px; }
+pre.rouge table pre { margin: 0; }
+pre.rouge, pre.rouge .w {
+  color: #24292f;
+  background-color: #f6f8fa;
+}
+pre.rouge .k, pre.rouge .kd, pre.rouge .kn, pre.rouge .kp, pre.rouge .kr, pre.rouge .kt, pre.rouge .kv {
+  color: #cf222e;
+}
+pre.rouge .gr {
+  color: #f6f8fa;
+}
+pre.rouge .gd {
+  color: #82071e;
+  background-color: #ffebe9;
+}
+pre.rouge .nb {
+  color: #953800;
+}
+pre.rouge .nc {
+  color: #953800;
+}
+pre.rouge .no {
+  color: #953800;
+}
+pre.rouge .nn {
+  color: #953800;
+}
+pre.rouge .sr {
+  color: #116329;
+}
+pre.rouge .na {
+  color: #116329;
+}
+pre.rouge .nt {
+  color: #116329;
+}
+pre.rouge .gi {
+  color: #116329;
+  background-color: #dafbe1;
+}
+pre.rouge .kc {
+  color: #0550ae;
+}
+pre.rouge .l, pre.rouge .ld, pre.rouge .m, pre.rouge .mb, pre.rouge .mf, pre.rouge .mh, pre.rouge .mi, pre.rouge .il, pre.rouge .mo, pre.rouge .mx {
+  color: #0550ae;
+}
+pre.rouge .sb {
+  color: #0550ae;
+}
+pre.rouge .bp {
+  color: #0550ae;
+}
+pre.rouge .ne {
+  color: #0550ae;
+}
+pre.rouge .nl {
+  color: #0550ae;
+}
+pre.rouge .py {
+  color: #0550ae;
+}
+pre.rouge .nv, pre.rouge .vc, pre.rouge .vg, pre.rouge .vi, pre.rouge .vm {
+  color: #0550ae;
+}
+pre.rouge .o, pre.rouge .ow {
+  color: #0550ae;
+}
+pre.rouge .gh {
+  color: #0550ae;
+  font-weight: bold;
+}
+pre.rouge .gu {
+  color: #0550ae;
+  font-weight: bold;
+}
+pre.rouge .s, pre.rouge .sa, pre.rouge .sc, pre.rouge .dl, pre.rouge .sd, pre.rouge .s2, pre.rouge .se, pre.rouge .sh, pre.rouge .sx, pre.rouge .s1, pre.rouge .ss {
+  color: #0a3069;
+}
+pre.rouge .nd {
+  color: #8250df;
+}
+pre.rouge .nf, pre.rouge .fm {
+  color: #8250df;
+}
+pre.rouge .err {
+  color: #f6f8fa;
+  background-color: #82071e;
+}
+pre.rouge .c, pre.rouge .ch, pre.rouge .cd, pre.rouge .cm, pre.rouge .cp, pre.rouge .cpf, pre.rouge .c1, pre.rouge .cs {
+  color: #6e7781;
+}
+pre.rouge .gl {
+  color: #6e7781;
+}
+pre.rouge .gt {
+  color: #6e7781;
+}
+pre.rouge .ni {
+  color: #24292f;
+}
+pre.rouge .si {
+  color: #24292f;
+}
+pre.rouge .ge {
+  color: #24292f;
+  font-style: italic;
+}
+pre.rouge .gs {
+  color: #24292f;
+  font-weight: bold;
+}
+</style>
+<style>
     pre.rouge .hll {
         background-color: #ffc;
         display: block;
@@ -456,50 +570,317 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_k8s_file">1. k8s file</a></li>
-<li><a href="#_dockerfile_location">2. dockerfile location</a></li>
-<li><a href="#_env_variables_of_the_workflows">3. env variables of the workflows</a></li>
-<li><a href="#_kubectl_config">4. kubectl config</a></li>
-<li><a href="#_permissions">5. Permissions</a></li>
+<li><a href="#_einführung">1. Einführung</a>
+<ul class="sectlevel2">
+<li><a href="#_voraussetzungen">1.1. Voraussetzungen</a></li>
+</ul>
+</li>
+<li><a href="#_dockerfile_setup_für_die_github_actions_pipeline">2. Dockerfile Setup für die GitHub Actions Pipeline</a>
+<ul class="sectlevel2">
+<li><a href="#_schritte_zum_einrichten_und_kopieren_des_dockerfiles">2.1. Schritte zum Einrichten und Kopieren des Dockerfiles</a></li>
+</ul>
+</li>
+<li><a href="#_leocloud_setup">3. Leocloud Setup</a>
+<ul class="sectlevel2">
+<li><a href="#_schritte_zur_einrichtung">3.1. Schritte zur Einrichtung</a></li>
+<li><a href="#_einmaliges_starten_des_kubernetes_deployments_auf_leocloud">3.2. Einmaliges Starten des Kubernetes Deployments auf Leocloud</a></li>
+</ul>
+</li>
+<li><a href="#_berechtigungen_für_die_paketverwaltung_in_github">4. Berechtigungen für die Paketverwaltung in GitHub</a></li>
+<li><a href="#_weitere_wichtige_umgebungsvariablen_in_den_workflows">5. Weitere wichtige Umgebungsvariablen in den Workflows</a></li>
+<li><a href="#_github_secrets">6. GitHub Secrets</a>
+<ul class="sectlevel2">
+<li><a href="#_zugriff_auf_die_kubernetes_konfigurationsdatei">6.1. Zugriff auf die Kubernetes-Konfigurationsdatei</a></li>
+</ul>
+</li>
+<li><a href="#_verwendung_anderer_kubernetes_deployments">7. Verwendung anderer Kubernetes-Deployments</a></li>
+<li><a href="#_abschluss">8. Abschluss</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_k8s_file"><a class="anchor" href="#_k8s_file"></a>1. k8s file</h2>
+<h2 id="_einführung"><a class="anchor" href="#_einführung"></a>1. Einführung</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>In diesem Projekt richten wir eine CI/CD-Pipeline mit GitHub Actions ein, um ein Quarkus-Projekt automatisiert zu bauen, zu testen und auf einer Kubernetes-Umgebung (K8s) unserer Schule bereitzustellen. Die Pipeline ermöglicht eine nahtlose Bereitstellung und stellt sicher, dass jede Änderung zuverlässig und ohne manuelle Eingriffe auf die Cloud gelangt.</p>
+</div>
+<div class="sect2">
+<h3 id="_voraussetzungen"><a class="anchor" href="#_voraussetzungen"></a>1.1. Voraussetzungen</h3>
+<div class="paragraph">
+<p>Bevor du loslegst, benötigst du:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Grundkenntnisse in GitHub Actions, Docker und Kubernetes.</p>
+</li>
+<li>
+<p>Zugriff auf ein Quarkus-Projekt-Repository in GitHub.</p>
+</li>
+<li>
+<p>Rechte ein Package erstellen, bearbeiten und auf "public" stellen zu können.</p>
+</li>
+<li>
+<p>Zugang zur Leocloud mit den nötigen Zugriffsrechten und Konfigurationen.</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_dockerfile_location"><a class="anchor" href="#_dockerfile_location"></a>2. dockerfile location</h2>
+<h2 id="_dockerfile_setup_für_die_github_actions_pipeline"><a class="anchor" href="#_dockerfile_setup_für_die_github_actions_pipeline"></a>2. Dockerfile Setup für die GitHub Actions Pipeline</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>Im <code>build.yaml</code> werden Umgebungsvariablen verwendet, um das Dockerfile korrekt zu referenzieren und zu positionieren. Hier erfährst du, wie das Dockerfile so konfiguriert wird, dass es in der Pipeline erfolgreich eingesetzt werden kann.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="yaml"><span class="c1"># Umgebungsvariablen im build.yaml</span>
+<span class="na">env</span><span class="pi">:</span>
+  <span class="na">DOCKERFILE_LOCATION</span><span class="pi">:</span> <span class="s1">'</span><span class="s">./src/main/docker/Dockerfile'</span>      <span class="c1"># Ursprünglicher Speicherort des Dockerfiles</span>
+  <span class="na">DOCKERFILE_LOCATION_NEW</span><span class="pi">:</span> <span class="s1">'</span><span class="s">./vehicle/target/'</span>             <span class="c1"># Zielort für das Dockerfile im Build</span></code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_schritte_zum_einrichten_und_kopieren_des_dockerfiles"><a class="anchor" href="#_schritte_zum_einrichten_und_kopieren_des_dockerfiles"></a>2.1. Schritte zum Einrichten und Kopieren des Dockerfiles</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Definieren der Dockerfile-Positionen</strong>
+In der <code>build.yaml</code> sind zwei zentrale Umgebungsvariablen für das Dockerfile definiert:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>DOCKERFILE_LOCATION</code>: Der Quellort des Dockerfiles, in dem es ursprünglich liegt.</p>
+</li>
+<li>
+<p><code>DOCKERFILE_LOCATION_NEW</code>: Der Zielort, an den das Dockerfile kopiert wird.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Kopieren des Dockerfiles in das Zielverzeichnis</strong>
+Während des Build-Schrittes wird das Dockerfile mit <code>cp</code> von <code>${{ env.DOCKERFILE_LOCATION }}</code> zu <code>${{ env.DOCKERFILE_LOCATION_NEW }}</code> kopiert. Dadurch liegt das Dockerfile in demselben Ordner wie das generierte <code>*-runner.jar</code>, was für den Docker-Build entscheidend ist.</p>
+</li>
+<li>
+<p><strong>Verwendung des Dockerfiles im Docker-Build</strong>
+Im Schritt für das Erstellen und Veröffentlichen des Docker-Images wird <code>DOCKERFILE_LOCATION_NEW</code> als Verzeichnis für den Docker-Build verwendet. Hierdurch kann der Build-Prozess das Dockerfile direkt im Zielverzeichnis referenzieren.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Beispiel für den <code>maven</code>-Schritt, der das Kopieren ausführt:</p>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_env_variables_of_the_workflows"><a class="anchor" href="#_env_variables_of_the_workflows"></a>3. env variables of the workflows</h2>
+<h2 id="_leocloud_setup"><a class="anchor" href="#_leocloud_setup"></a>3. Leocloud Setup</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>Für dieses Projekt ist der Zugriff auf die Leocloud-Umgebung erforderlich, um die Kubernetes-Deployment-Funktionen nutzen zu können. Bitte folge den Anweisungen im offiziellen Benutzerhandbuch, um die Leocloud korrekt einzurichten:</p>
+</div>
+<div class="paragraph">
+<p>Link zur Anleitung: <a href="https://cloud.htl-leonding.ac.at/" class="bare">https://cloud.htl-leonding.ac.at/</a></p>
+</div>
+<div class="sect2">
+<h3 id="_schritte_zur_einrichtung"><a class="anchor" href="#_schritte_zur_einrichtung"></a>3.1. Schritte zur Einrichtung</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Zugang zur Leocloud</strong>
+Öffne die Anleitung und folge den Schritten zur Registrierung und Anmeldung, falls du noch keinen Account hast.</p>
+</li>
+<li>
+<p><strong>Grundlegende Einrichtung</strong>
+Befolge die Schritte zur Installation und Konfiguration der notwendigen Tools für den Zugriff auf die Leocloud. Stelle sicher, dass du über die entsprechenden Rechte und die Konfiguration für den Zugriff auf die Kubernetes-Umgebung verfügst.</p>
+</li>
+<li>
+<p><strong>Verbindungstest</strong>
+Teste, ob die Verbindung zur Leocloud erfolgreich hergestellt werden kann, indem du die in der Anleitung beschriebenen Schritte ausführst.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Nach Abschluss dieser Einrichtung solltest du die Leocloud vollständig nutzen können, um Deployments im Rahmen des Projekts durchzuführen. Vergewissere dich, dass die <code>kubectl</code> Konfigurationsdatei die korrekten Werte enthält. Du kannst dies überprüfen, indem du den Befehl <code>kubectl config view</code> ausführst.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_einmaliges_starten_des_kubernetes_deployments_auf_leocloud"><a class="anchor" href="#_einmaliges_starten_des_kubernetes_deployments_auf_leocloud"></a>3.2. Einmaliges Starten des Kubernetes Deployments auf Leocloud</h3>
+<div class="paragraph">
+<p>Um das Kubernetes Deployment auf Leocloud erfolgreich einzurichten, musst du das Deployment einmal manuell starten. Die GitHub Actions sind so konfiguriert, dass sie nur ein vorhandenes Deployment mit dem neuen Image neu starten. Hier sind die Schritte, um das initiale Deployment durchzuführen:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Leocloud Authentifizierung</strong></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Melde dich bei Leocloud an:</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">leocloud auth login</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Maven Projekt bauen</strong></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Baue das Projekt und bereite das Dockerfile vor:</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">mvn clean package
+<span class="nb">cp </span>src/main/docker/Dockerfile target</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Docker Image erstellen</strong></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Baue das Docker-Image und achte darauf, dass der Tag <mark>in Kleinbuchstaben</mark> geschrieben ist:</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">docker build <span class="nt">--tag</span> ghcr.io/&lt;dein Repository&gt;:latest ./vehicle/target</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Docker Login</strong></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Melde dich bei der GitHub Container Registry an:</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">docker login ghcr.io</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Docker Image pushen</strong></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Push das Docker-Image zur Registry, wobei der Tag ebenfalls <mark>in Kleinbuchstaben</mark> sein muss:</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">docker push ghcr.io/&lt;dein Repository&gt;:latest</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Kubernetes Deployment anwenden</strong></p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="title">Wende das Kubernetes Deployment an:</div>
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash">kubectl apply <span class="nt">-f</span> k8s/appsrv.yaml</code></pre>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_kubectl_config"><a class="anchor" href="#_kubectl_config"></a>4. kubectl config</h2>
+<h2 id="_berechtigungen_für_die_paketverwaltung_in_github"><a class="anchor" href="#_berechtigungen_für_die_paketverwaltung_in_github"></a>4. Berechtigungen für die Paketverwaltung in GitHub</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>Um ein Package in GitHub erstellen und bearbeiten zu können, muss man Mitglied einer Organisation sein. Hier sind die erforderlichen Schritte und Einstellungen:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Mitgliedschaft in der Organisation</strong>
+Stelle sicher, dass du ein Mitglied der betreffenden Organisation bist.</p>
+</li>
+<li>
+<p><strong>Öffentliche Pakete erstellen</strong>
+Um ein Package auf öffentlich zu setzen, muss in der Organisation unter <code>Settings &gt; Code, planning, and automation &gt; Packages</code> die Option zur Erstellung öffentlicher Pakete aktiviert sein.</p>
+</li>
+<li>
+<p><strong>Schreibberechtigungen</strong>
+Mitglieder benötigen Schreibberechtigungen, die unter <code>Settings &gt; Access &gt; Organization roles &gt; Role assignments</code> vergeben werden können.</p>
+</li>
+<li>
+<p><strong>Paketverwaltung aktivieren</strong>
+Wenn das Package lokal erstellt und auf öffentlich gesetzt werden kann, gehe zu dem jeweiligen Package, öffne die Package-Einstellungen und klicke unter "Manage Actions access" auf den Button "Add Repository". Füge dein Repository hinzu, damit es auf das Package zugreifen und es bearbeiten kann.</p>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_permissions"><a class="anchor" href="#_permissions"></a>5. Permissions</h2>
+<h2 id="_weitere_wichtige_umgebungsvariablen_in_den_workflows"><a class="anchor" href="#_weitere_wichtige_umgebungsvariablen_in_den_workflows"></a>5. Weitere wichtige Umgebungsvariablen in den Workflows</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>In den GitHub Actions Workflows (<code>build.yaml</code> und <code>release-artifacts.yaml</code>) werden verschiedene Umgebungsvariablen (<code>env</code>) verwendet, um die Pipeline-Anforderungen und die Projektkonfiguration zu steuern. Dazu gehören Variablen wie die Java-Version und die Java-Distribution, die für den Build und das Deployment festgelegt werden können. Beispiele dafür sind:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="yaml"><span class="na">env</span><span class="pi">:</span>
+  <span class="na">JAVA_VERSION</span><span class="pi">:</span> <span class="s1">'</span><span class="s">21'</span>
+  <span class="na">JAVA_DISTRIBUTION</span><span class="pi">:</span> <span class="s1">'</span><span class="s">temurin'</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Diese Variablen (<code>JAVA_VERSION</code> und <code>JAVA_DISTRIBUTION</code>) sorgen dafür, dass beide Workflows mit der gewünschten Java-Version und Distribution ausgeführt werden, wodurch eine konsistente Umgebung gewährleistet wird. Du kannst diese Werte in den Dateien <code>build.yaml</code> und <code>release-artifacts.yaml</code> nach Bedarf anpassen.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_github_secrets"><a class="anchor" href="#_github_secrets"></a>6. GitHub Secrets</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_zugriff_auf_die_kubernetes_konfigurationsdatei"><a class="anchor" href="#_zugriff_auf_die_kubernetes_konfigurationsdatei"></a>6.1. Zugriff auf die Kubernetes-Konfigurationsdatei</h3>
+<div class="paragraph">
+<p>Um sicherzustellen, dass der <code>deployment.yaml</code> Workflow Zugriff auf die Kubernetes-Konfigurationsdatei für Leocloud hat, musst du das folgende Kommando ausführen:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="rouge highlight"><code data-lang="bash"><span class="nb">cat</span> <span class="nv">$HOME</span>/.kube/config | <span class="nb">base64</span></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Die Ausgabe dieses Kommandos muss dann in die GitHub Actions unter dem Namen <code>KUBE_CONFIG_DATA</code> hinzugefügt werden. Dadurch kann der Workflow auf die Konfigurationsdatei zugreifen und die notwendigen Berechtigungen für die Interaktion mit Leocloud bereitstellen.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_verwendung_anderer_kubernetes_deployments"><a class="anchor" href="#_verwendung_anderer_kubernetes_deployments"></a>7. Verwendung anderer Kubernetes-Deployments</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Neben der Leocloud-Plattform ist es auch möglich, andere Kubernetes-Deployments zu nutzen. Voraussetzung ist, dass die korrekte Konfigurationsdatei verwendet wird, die den Zugriff auf das entsprechende Kubernetes-Cluster ermöglicht. Achte darauf, dass alle erforderlichen Berechtigungen und Konfigurationen in der Datei korrekt angegeben sind.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_abschluss"><a class="anchor" href="#_abschluss"></a>8. Abschluss</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nach der Durchführung aller oben genannten Schritte sollten die GitHub Actions nun ohne Probleme durchlaufen. Das Projekt ist jetzt vollständig konfiguriert und bereit für den Einsatz. Du kannst fortfahren, neue Änderungen zu implementieren und diese effizient über die GitHub Actions zu integrieren. Viel Erfolg bei der weiteren Entwicklung!</p>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2024-11-05 07:18:50 UTC
+Last updated 2024-11-05 09:55:22 UTC
 </div>
 </div>
 </body>
