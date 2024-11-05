@@ -36,13 +36,6 @@ endif::[]
 GitHub Actions ist ein CI/CD-Tool,
 das automatisierte Workflows direkt in GitHub ermöglicht.
 
-**Ziele von GitHub Actions**:
-
-* Beschleunigung der Entwicklungsprozesse:
-** Automatisierung von Tests, Builds und Bereitstellungen.
-* Zentralisierung:
-** Integration von Arbeitsabläufen in die GitHub-Plattform.
-
 == CI/CD
 
 [.stretch]
