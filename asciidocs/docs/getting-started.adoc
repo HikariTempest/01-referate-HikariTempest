@@ -17,9 +17,56 @@ ifdef::env-GitHub[]
 :warning-caption: :warning:
 endif::[]
 
+== Einführung
+
+In diesem Projekt richten wir eine CI/CD-Pipeline mit GitHub Actions ein, um ein Quarkus-Projekt automatisiert zu bauen, zu testen und auf einer Kubernetes-Umgebung (K8s) unserer Schule bereitzustellen. Die Pipeline ermöglicht eine nahtlose Bereitstellung und stellt sicher, dass jede Änderung zuverlässig und ohne manuelle Eingriffe auf die Cloud gelangt.
+
+
+=== Voraussetzungen
+
+Bevor du loslegst, benötigst du:
+
+* Grundkenntnisse in GitHub Actions, Docker und Kubernetes.
+* Zugriff auf ein Quarkus-Projekt-Repository in GitHub.
+* Rechte ein Package erstellen, bearbeiten und auf "public" stellen zu können.
+* Zugang zur Leocloud mit den nötigen Zugriffsrechten und Konfigurationen.
+
+== Dockerfile Position
+
+== Dockerfile Setup für die GitHub Actions Pipeline
+
+Im `build.yaml` werden Umgebungsvariablen verwendet, um das Dockerfile korrekt zu referenzieren und zu positionieren. Hier erfährst du, wie das Dockerfile so konfiguriert wird, dass es in der Pipeline erfolgreich eingesetzt werden kann.
+
+[source,yaml]
+----
+# Umgebungsvariablen im build.yaml
+env:
+  DOCKERFILE_LOCATION: './src/main/docker/Dockerfile'      # Ursprünglicher Speicherort des Dockerfiles
+  DOCKERFILE_LOCATION_NEW: './vehicle/target/'             # Zielort für das Dockerfile im Build
+----
+
+=== Schritte zum Einrichten und Kopieren des Dockerfiles
+
+1. **Definieren der Dockerfile-Positionen**
+In der `build.yaml` sind zwei zentrale Umgebungsvariablen für das Dockerfile definiert:
+- `DOCKERFILE_LOCATION`: Der Quellort des Dockerfiles, in dem es ursprünglich liegt.
+- `DOCKERFILE_LOCATION_NEW`: Der Zielort, an den das Dockerfile kopiert wird.
+
+2. **Kopieren des Dockerfiles in das Zielverzeichnis**
+Während des Build-Schrittes wird das Dockerfile mit `cp` von `${{ env.DOCKERFILE_LOCATION }}` zu `${{ env.DOCKERFILE_LOCATION_NEW }}` kopiert. Dadurch liegt das Dockerfile in demselben Ordner wie das generierte `*-runner.jar`, was für den Docker-Build entscheidend ist.
+
+3. **Verwendung des Dockerfiles im Docker-Build**
+Im Schritt für das Erstellen und Veröffentlichen des Docker-Images wird `DOCKERFILE_LOCATION_NEW` als Verzeichnis für den Docker-Build verwendet. Hierdurch kann der Build-Prozess das Dockerfile direkt im Zielverzeichnis referenzieren.
+
+Beispiel für den `maven`-Schritt, der das Kopieren ausführt:
+
+
+== Setup k8s
+
+Bevor man mit
+
 == k8s file
 
-== dockerfile location
 
 == env variables of the workflows
 
