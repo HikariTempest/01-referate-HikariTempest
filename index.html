@@ -451,20 +451,33 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="details">
 <span id="author" class="author">Arwed Schnalzenberger</span><br>
 <span id="revnumber">version 1.0.0,</span>
-<span id="revdate">2024-11-04</span>
+<span id="revdate">2024-11-05</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_übersicht">1. Übersicht</a></li>
-<li><a href="#_gebrauch">2. Gebrauch</a>
+<li><a href="#_übersicht">1. Übersicht</a>
 <ul class="sectlevel2">
-<li><a href="#_ohne_github_actions">2.1. Ohne GitHub Actions</a></li>
-<li><a href="#_mit_github_actions">2.2. Mit GitHub Actions</a></li>
+<li><a href="#_enthaltene_skripte">1.1. Enthaltene Skripte</a></li>
+<li><a href="#_github_actions_pipeline_des_projektes">1.2. GitHub Actions Pipeline des Projektes</a></li>
+<li><a href="#_getting_started">1.3. Getting Started</a></li>
 </ul>
 </li>
-<li><a href="#_alternativen">3. Alternativen</a></li>
-<li><a href="#_quellen">4. Quellen</a></li>
+<li><a href="#_gebrauch_von_github_actions">2. Gebrauch von GitHub Actions</a></li>
+<li><a href="#_was_ist_cicd">3. Was ist CI/CD?</a>
+<ul class="sectlevel2">
+<li><a href="#_continuous_integration_ci">3.1. Continuous Integration (CI)</a></li>
+<li><a href="#_continuous_delivery_cd">3.2. Continuous Delivery (CD)</a></li>
+<li><a href="#_continuous_deployment">3.3. Continuous Deployment</a></li>
+<li><a href="#_cicd_pipeline">3.4. CI/CD Pipeline</a></li>
+</ul>
+</li>
+<li><a href="#_alternativen">4. Alternativen</a>
+<ul class="sectlevel2">
+<li><a href="#_kriterienkatalog_github_actions_vs_jenkins_azure_pipelines_und_circleci">4.1. Kriterienkatalog: GitHub Actions vs. Jenkins, Azure Pipelines und CircleCI</a></li>
+</ul>
+</li>
+<li><a href="#_quellen">5. Quellen</a></li>
 </ul>
 </div>
 </div>
@@ -472,39 +485,194 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_übersicht"><a class="anchor" href="#_übersicht"></a>1. Übersicht</h2>
 <div class="sectionbody">
-
-</div>
-</div>
-<div class="sect1">
-<h2 id="_gebrauch"><a class="anchor" href="#_gebrauch"></a>2. Gebrauch</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_ohne_github_actions"><a class="anchor" href="#_ohne_github_actions"></a>2.1. Ohne GitHub Actions</h3>
-
+<div class="paragraph">
+<p>Dieses Projekt wurde im Rahmen einer Präsentation über GitHub Actions entwickelt und enthält drei von mir erstellte GitHub Action-Skripte sowie Erläuterungen zu deren Funktionsweise und Einsatz.</p>
 </div>
 <div class="sect2">
-<h3 id="_mit_github_actions"><a class="anchor" href="#_mit_github_actions"></a>2.2. Mit GitHub Actions</h3>
-
+<h3 id="_enthaltene_skripte"><a class="anchor" href="#_enthaltene_skripte"></a>1.1. Enthaltene Skripte</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Build</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Dieses Skript erstellt ein Docker-Image aus einem kleinen Maven-Java-Projekt und pusht das fertige Image in die Container Registry "ghcr.io".</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Deploy</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Hier wird das zuvor erstellte Image in einer Kubernetes-Umgebung aktualisiert. Die Bereitstellung erfolgt mittels <code>kubectl</code> und einer in den GitHub Secrets gespeicherten <code>kubectl</code>-Konfigurationsdatei.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Release Artifacts</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Dieses Skript erstellt ein Prerelease auf GitHub. Dabei werden alle Commits seit dem letzten Release zusammengefasst und mit den Commit-Nachrichten sowie dem <code>.jar</code>-Artefakt der Maven-Java-Anwendung veröffentlicht.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_github_actions_pipeline_des_projektes"><a class="anchor" href="#_github_actions_pipeline_des_projektes"></a>1.2. GitHub Actions Pipeline des Projektes</h3>
+<div class="imageblock">
+<div class="content">
+<img src="https://www.plantuml.com/plantuml/png/jLBBRi8m4BpxAqQ-fuSU4KByYh4tmSMFrDu5eOf_BoQXLLHHUkd5zixEoBDZRokRmXA32jGpEAFuOSzmlf1bdvDAsH46puN6Z0y5z3uGzCkREHeDKs6l17MPU7edFZYDzLfsabWscyOOzfNAaSfD3hmB2Srdm0oK63R7qGTQOAEn1pCiCQRA2q2FKlVDjylsG0M51b-vdFMDTVaovcWC-Vp8MVVwBzwcI-7ZjKPVSdpcib3CJDqSLw1iGvOVUKwiHQOt-LYoa-dLBiesf0lTvkuVA-X4frP6pyW9qVYarRtTNQdtiUQzOTDORMdLBta_xA0hJVWy3Apc3uIJgQXYBTNQIz3g3-B9_tS2MqfEOlW4" alt="jLBBRi8m4BpxAqQ fuSU4KByYh4tmSMFrDu5eOf BoQXLLHHUkd5zixEoBDZRokRmXA32jGpEAFuOSzmlf1bdvDAsH46puN6Z0y5z3uGzCkREHeDKs6l17MPU7edFZYDzLfsabWscyOOzfNAaSfD3hmB2Srdm0oK63R7qGTQOAEn1pCiCQRA2q2FKlVDjylsG0M51b vdFMDTVaovcWC Vp8MVVwBzwcI 7ZjKPVSdpcib3CJDqSLw1iGvOVUKwiHQOt LYoa dLBiesf0lTvkuVA X4frP6pyW9qVYarRtTNQdtiUQzOTDORMdLBta xA0hJVWy3Apc3uIJgQXYBTNQIz3g3 B9 tS2MqfEOlW4">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_getting_started"><a class="anchor" href="#_getting_started"></a>1.3. Getting Started</h3>
+<div class="paragraph">
+<p><a href="./getting-started.html#_github_actions_intro__getting_started">Getting Started</a></p>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_alternativen"><a class="anchor" href="#_alternativen"></a>3. Alternativen</h2>
+<h2 id="_gebrauch_von_github_actions"><a class="anchor" href="#_gebrauch_von_github_actions"></a>2. Gebrauch von GitHub Actions</h2>
 <div class="sectionbody">
-
+<div class="paragraph">
+<p>GitHub Actions ist ein CI/CD-Tool, das automatisierte Workflows direkt in GitHub ermöglicht, um Entwicklungsprozesse wie Tests, Builds und Bereitstellungen zu beschleunigen und zu zentralisieren. Ohne GitHub Actions sind diese Prozesse oft manuell und fehleranfälliger, was mehr Zeit und Ressourcen beansprucht.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_quellen"><a class="anchor" href="#_quellen"></a>4. Quellen</h2>
+<h2 id="_was_ist_cicd"><a class="anchor" href="#_was_ist_cicd"></a>3. Was ist CI/CD?</h2>
 <div class="sectionbody">
-
+<div class="imageblock">
+<div class="content">
+<img src="images/ci-cd-cd-atlassian.png" alt="ci cd cd atlassian">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_continuous_integration_ci"><a class="anchor" href="#_continuous_integration_ci"></a>3.1. Continuous Integration (CI)</h3>
+<div class="paragraph">
+<p>Entwickler integrieren häufig ihre Änderungen in den Hauptzweig, wodurch Builds und Tests automatisch laufen. So werden Integrationsprobleme frühzeitig vermieden.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_continuous_delivery_cd"><a class="anchor" href="#_continuous_delivery_cd"></a>3.2. Continuous Delivery (CD)</h3>
+<div class="paragraph">
+<p>Auf CI aufbauend, stellt CD sicher, dass alle Änderungen nach dem Build automatisch in eine Test- oder Produktionsumgebung gelangen und bei Bedarf jederzeit veröffentlicht werden können.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_continuous_deployment"><a class="anchor" href="#_continuous_deployment"></a>3.3. Continuous Deployment</h3>
+<div class="paragraph">
+<p>Jede Änderung, die alle Tests besteht, wird ohne menschliches Eingreifen direkt für die Nutzer bereitgestellt, was schnelle Feedback-Schleifen ermöglicht.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cicd_pipeline"><a class="anchor" href="#_cicd_pipeline"></a>3.4. CI/CD Pipeline</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/cicd-pipeline.png" alt="cicd pipeline">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_alternativen"><a class="anchor" href="#_alternativen"></a>4. Alternativen</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Azure Pipelines</p>
+</li>
+<li>
+<p>Jenkins</p>
+</li>
+<li>
+<p>Circle CI</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="_kriterienkatalog_github_actions_vs_jenkins_azure_pipelines_und_circleci"><a class="anchor" href="#_kriterienkatalog_github_actions_vs_jenkins_azure_pipelines_und_circleci"></a>4.1. Kriterienkatalog: GitHub Actions vs. Jenkins, Azure Pipelines und CircleCI</h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/criteria-catalog.png" alt="criteria catalog">
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_quellen"><a class="anchor" href="#_quellen"></a>5. Quellen</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Docker. Dockerignore-Dateien: <a href="https://docs.docker.com/build/concepts/context/#dockerignore-files" class="bare">https://docs.docker.com/build/concepts/context/#dockerignore-files</a></p>
+</li>
+<li>
+<p>Quarkus-Seminar. 2024 Lab Minikube: <a href="https://quarkus-seminar.github.io/2024-lab-minikube/" class="bare">https://quarkus-seminar.github.io/2024-lab-minikube/</a></p>
+</li>
+<li>
+<p>HTL Leonding. Docker Vorlesungsnotizen: <a href="https://htl-leonding-college.github.io/docker-lecture-notes/" class="bare">https://htl-leonding-college.github.io/docker-lecture-notes/</a></p>
+</li>
+<li>
+<p>HTL Leonding. Quarkus JAR GitHub Actions Demo: <a href="https://htl-leonding-college.github.io/quarkus-jar-gh-actions-demo/" class="bare">https://htl-leonding-college.github.io/quarkus-jar-gh-actions-demo/</a></p>
+</li>
+<li>
+<p>HTL Leonding. Quarkus JAR GitHub Actions Demo (GitHub Actions): <a href="https://htl-leonding-college.github.io/quarkus-jar-gh-actions-demo/gh-actions.html" class="bare">https://htl-leonding-college.github.io/quarkus-jar-gh-actions-demo/gh-actions.html</a></p>
+</li>
+<li>
+<p>HTL Leonding. Git Vorlesungsnotizen: <a href="https://htl-leonding-college.github.io/git-lecture-notes/" class="bare">https://htl-leonding-college.github.io/git-lecture-notes/</a></p>
+</li>
+<li>
+<p>Baeldung. Maven Wrapper: <a href="https://www.baeldung.com/maven-wrapper" class="bare">https://www.baeldung.com/maven-wrapper</a></p>
+</li>
+<li>
+<p>GitHub Docs. Arbeiten mit einem Container-Registry: <a href="https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry" class="bare">https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry</a></p>
+</li>
+<li>
+<p>GitHub Docs. Webhook-Events und Payloads: <a href="https://docs.github.com/en/webhooks/webhook-events-and-payloads#workflow_dispatch" class="bare">https://docs.github.com/en/webhooks/webhook-events-and-payloads#workflow_dispatch</a></p>
+</li>
+<li>
+<p>GitHub Docs. Workflow-Steuerung: <a href="https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs" class="bare">https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/control-the-concurrency-of-workflows-and-jobs</a></p>
+</li>
+<li>
+<p>GitHub Marketplace. Push to GitHub Container Registry: <a href="https://github.com/marketplace/actions/push-to-ghcr" class="bare">https://github.com/marketplace/actions/push-to-ghcr</a></p>
+</li>
+<li>
+<p>GitHub CLI. Release erstellen: <a href="https://cli.github.com/manual/gh_release_create" class="bare">https://cli.github.com/manual/gh_release_create</a></p>
+</li>
+<li>
+<p>Stack Overflow. Fehler: permission denied (write package): <a href="https://stackoverflow.com/questions/69014742/github-denied-permission-denied-write-package" class="bare">https://stackoverflow.com/questions/69014742/github-denied-permission-denied-write-package</a></p>
+</li>
+<li>
+<p>Atlassian. Kontinuierliche Integration vs. Lieferung vs. Bereitstellung: <a href="https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment" class="bare">https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment</a></p>
+</li>
+<li>
+<p>Medium. CI/CD-Tools im Vergleich: <a href="https://medium.com/@meerzoheb/ci-cd-tools-showdown-azure-devops-vs-circleci-vs-github-actions-vs-jenkins-f79353752750" class="bare">https://medium.com/@meerzoheb/ci-cd-tools-showdown-azure-devops-vs-circleci-vs-github-actions-vs-jenkins-f79353752750</a></p>
+</li>
+<li>
+<p>PlantUML: <a href="https://plantuml.com" class="bare">https://plantuml.com</a></p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2024-11-04 14:12:14 UTC
+Last updated 2024-11-05 07:18:50 UTC
 </div>
 </div>
 </body>
