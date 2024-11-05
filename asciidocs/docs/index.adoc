@@ -16,6 +16,10 @@ ifdef::env-GitHub[]
 :warning-caption: :warning:
 endif::[]
 
+== Slides
+
+RevealJs Slides can be found https://2425-5bhif-wmc.github.io/01-referate-HikariTempest/slides[here^]
+
 == Übersicht
 
 Dieses Projekt wurde im Rahmen einer Präsentation über GitHub Actions entwickelt und enthält drei von mir erstellte GitHub Action-Skripte sowie Erläuterungen zu deren Funktionsweise und Einsatz.
