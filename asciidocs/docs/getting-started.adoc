@@ -79,6 +79,78 @@ Teste, ob die Verbindung zur Leocloud erfolgreich hergestellt werden kann, indem
 
 Nach Abschluss dieser Einrichtung solltest du die Leocloud vollständig nutzen können, um Deployments im Rahmen des Projekts durchzuführen. Vergewissere dich, dass die `kubectl` Konfigurationsdatei die korrekten Werte enthält. Du kannst dies überprüfen, indem du den Befehl `kubectl config view` ausführst.
 
+=== Einmaliges Starten des Kubernetes Deployments auf Leocloud
+
+Um das Kubernetes Deployment auf Leocloud erfolgreich einzurichten, musst du das Deployment einmal manuell starten. Die GitHub Actions sind so konfiguriert, dass sie nur ein vorhandenes Deployment mit dem neuen Image neu starten. Hier sind die Schritte, um das initiale Deployment durchzuführen:
+
+* **Leocloud Authentifizierung**
+
+.Melde dich bei Leocloud an:
+[source,bash]
+----
+leocloud auth login
+----
+
+
+* **Maven Projekt bauen**
+
+.Baue das Projekt und bereite das Dockerfile vor:
+[source,bash]
+----
+mvn clean package
+cp src/main/docker/Dockerfile target
+----
+
+* **Docker Image erstellen**
+
+.Baue das Docker-Image und achte darauf, dass der Tag #in Kleinbuchstaben# geschrieben ist:
+[source,bash]
+----
+docker build --tag ghcr.io/<dein Repository>:latest ./vehicle/target
+----
+
+* **Docker Login**
+
+.Melde dich bei der GitHub Container Registry an:
+[source,bash]
+----
+docker login ghcr.io
+----
+
+* **Docker Image pushen**
+
+.Push das Docker-Image zur Registry, wobei der Tag ebenfalls #in Kleinbuchstaben# sein muss:
+[source,bash]
+----
+docker push ghcr.io/<dein Repository>:latest
+----
+
+* **Kubernetes Deployment anwenden**
+
+.Wende das Kubernetes Deployment an:
+[source,bash]
+----
+kubectl apply -f k8s/appsrv.yaml
+----
+
+
+== Berechtigungen für die Paketverwaltung in GitHub
+
+Um ein Package in GitHub erstellen und bearbeiten zu können, muss man Mitglied einer Organisation sein. Hier sind die erforderlichen Schritte und Einstellungen:
+
+1. **Mitgliedschaft in der Organisation**
+Stelle sicher, dass du ein Mitglied der betreffenden Organisation bist.
+
+2. **Öffentliche Pakete erstellen**
+Um ein Package auf öffentlich zu setzen, muss in der Organisation unter `Settings > Code, planning, and automation > Packages` die Option zur Erstellung öffentlicher Pakete aktiviert sein.
+
+3. **Schreibberechtigungen**
+Mitglieder benötigen Schreibberechtigungen, die unter `Settings > Access > Organization roles > Role assignments` vergeben werden können.
+
+4. **Paketverwaltung aktivieren**
+Wenn das Package lokal erstellt und auf öffentlich gesetzt werden kann, gehe zu dem jeweiligen Package, öffne die Package-Einstellungen und klicke unter "Manage Actions access" auf den Button "Add Repository". Füge dein Repository hinzu, damit es auf das Package zugreifen und es bearbeiten kann.
+
+
 
 == Weitere wichtige Umgebungsvariablen in den Workflows
 
@@ -94,7 +166,22 @@ env:
 Diese Variablen (`JAVA_VERSION` und `JAVA_DISTRIBUTION`) sorgen dafür, dass beide Workflows mit der gewünschten Java-Version und Distribution ausgeführt werden, wodurch eine konsistente Umgebung gewährleistet wird. Du kannst diese Werte in den Dateien `build.yaml` und `release-artifacts.yaml` nach Bedarf anpassen.
 
 
-== kubectl config
+== GitHub Secrets
 
-== Permissions
+=== Zugriff auf die Kubernetes-Konfigurationsdatei
+
+Um sicherzustellen, dass der `deployment.yaml` Workflow Zugriff auf die Kubernetes-Konfigurationsdatei für Leocloud hat, musst du das folgende Kommando ausführen:
+
+[source,bash]
+----
+cat $HOME/.kube/config | base64
+----
+
+Die Ausgabe dieses Kommandos muss dann in die GitHub Actions unter dem Namen `KUBE_CONFIG_DATA` hinzugefügt werden. Dadurch kann der Workflow auf die Konfigurationsdatei zugreifen und die notwendigen Berechtigungen für die Interaktion mit Leocloud bereitstellen.
+
+
+== Abschluss
+
+Nach der Durchführung aller oben genannten Schritte sollten die GitHub Actions nun ohne Probleme durchlaufen. Das Projekt ist jetzt vollständig konfiguriert und bereit für den Einsatz. Du kannst fortfahren, neue Änderungen zu implementieren und diese effizient über die GitHub Actions zu integrieren. Viel Erfolg bei der weiteren Entwicklung!
+
 
