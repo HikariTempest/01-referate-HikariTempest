@@ -1,0 +1,76 @@
+= GitHub Actions: Automatisierung von CI/CD-Prozessen
+:author: firstname lastname
+:email: a.schnalzenberger@HTBLALeonding.onmicrosoft.com
+:revnumber: 1.0
+:revdate: {docdate}
+:revremark: SLIDEDEMO @ HTL Leonding
+:encoding: utf-8
+:lang: de
+:doctype: article
+//:icons: font
+:customcss: css/presentation.css
+//:revealjs_customtheme: css/sky.css
+//:revealjs_customtheme: css/black.css
+:revealjs_width: 1408
+:revealjs_height: 792
+:source-highlighter: highlightjs
+//:revealjs_parallaxBackgroundImage: images/background-landscape-light-orange.jpg
+//:revealjs_parallaxBackgroundSize: 4936px 2092px
+//:highlightjs-theme: css/atom-one-light.css
+// we want local served font-awesome fonts
+:iconfont-remote!:
+:iconfont-name: fonts/fontawesome/css/all
+//:revealjs_parallaxBackgroundImage: background-landscape-light-orange.jpg
+//:revealjs_parallaxBackgroundSize: 4936px 2092px
+ifdef::env-ide[]
+:imagesdir: ../images
+endif::[]
+ifndef::env-ide[]
+:imagesdir: images
+endif::[]
+//:revealjs_theme: sky
+//:title-slide-background-image: img.png
+:title-slide-transition: zoom
+:title-slide-transition-speed: fast
+
+GitHub Actions ist ein CI/CD-Tool,
+das automatisierte Workflows direkt in GitHub ermöglicht.
+
+**Ziele von GitHub Actions**:
+
+* Beschleunigung der Entwicklungsprozesse:
+** Automatisierung von Tests, Builds und Bereitstellungen.
+* Zentralisierung:
+** Integration von Arbeitsabläufen in die GitHub-Plattform.
+
+== CI/CD
+
+[.stretch]
+image::ci-cd-cd-atlassian.png[]
+
+=== CI/CD Pipeline
+
+[.stretch]
+image::cicd-pipeline.png[]
+
+=== Alternativen
+
+* Azure Pipelines
+* Jenkins
+* Circle CI
+
+=== Kriterienkatalog: GitHub Actions vs. Jenkins, Azure Pipelines und CircleCI
+
+[.stretch]
+image::criteria-catalog.png[]
+
+
+== GitHub Actions Pipeline des Projektes
+
+image::https://www.plantuml.com/plantuml/png/jLBBRi8m4BpxAqQ-fuSU4KByYh4tmSMFrDu5eOf_BoQXLLHHUkd5zixEoBDZRokRmXA32jGpEAFuOSzmlf1bdvDAsH46puN6Z0y5z3uGzCkREHeDKs6l17MPU7edFZYDzLfsabWscyOOzfNAaSfD3hmB2Srdm0oK63R7qGTQOAEn1pCiCQRA2q2FKlVDjylsG0M51b-vdFMDTVaovcWC-Vp8MVVwBzwcI-7ZjKPVSdpcib3CJDqSLw1iGvOVUKwiHQOt-LYoa-dLBiesf0lTvkuVA-X4frP6pyW9qVYarRtTNQdtiUQzOTDORMdLBta_xA0hJVWy3Apc3uIJgQXYBTNQIz3g3-B9_tS2MqfEOlW4[]
+
+== Quellen
+
+https://2425-5bhif-wmc.github.io/01-referate-HikariTempest/index.html#_quellen
+
+
