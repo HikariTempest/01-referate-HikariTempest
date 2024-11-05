@@ -23,7 +23,10 @@ jobs:
     env:
       JAVA_VERSION: '21'
       JAVA_DISTRIBUTION: 'temurin'
-      DOCKERFILE_LOCATION: './vehicle/target/'
+      DOCKERFILE_LOCATION_NEW: './vehicle/target/'
+      DOCKERFILE_LOCATION: './src/main/docker/Dockerfile'
+      RUNNER_JAR_LOCATION: './target'
+      PROJECT_LOCATION: './vehicle/'
       IMAGE_TAG: 'latest'
 
     steps:
@@ -35,13 +38,13 @@ jobs:
           distribution: ${{ env.JAVA_DISTRIBUTION }}
 
       - name: Build vehicle project with maven
-        working-directory: ./vehicle
+        working-directory: ${{ env.PROJECT_LOCATION }}
         run: | # multi line string operator
           mvn clean package
-          cp ./src/main/docker/Dockerfile ./target
+          cp ${{ env.DOCKERFILE_LOCATION }} ${{ env.RUNNER_JAR_LOCATION }}
 
       - name: check Dockerfile
-        working-directory: ./vehicle/target
+        working-directory: ${{ env.DOCKERFILE_LOCATION_NEW }}
         run: dir
 
       - name: Log in to GitHub Container Registry
@@ -51,7 +54,7 @@ jobs:
         run: |
           REPOSITORY=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')
 
-          docker build --tag ghcr.io/$REPOSITORY:${{ env.IMAGE_TAG }} ${{ env.DOCKERFILE_LOCATION }}
+          docker build --tag ghcr.io/$REPOSITORY:${{ env.IMAGE_TAG }} ${{ env.DOCKERFILE_LOCATION_NEW }}
 
           docker push ghcr.io/$REPOSITORY:${{ env.IMAGE_TAG }}
           
