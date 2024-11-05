@@ -20,6 +20,6 @@ public class HelloResource {
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/{name}")
     public String helloPerson(@PathParam("name") String name) {
-        return "Welcome, " + name + " to my little vehicle application!";
+        return "Welcome, %s to my little vehicle application!".formatted(name);
     }
 }
