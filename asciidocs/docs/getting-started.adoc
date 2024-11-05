@@ -31,7 +31,6 @@ Bevor du loslegst, benötigst du:
 * Rechte ein Package erstellen, bearbeiten und auf "public" stellen zu können.
 * Zugang zur Leocloud mit den nötigen Zugriffsrechten und Konfigurationen.
 
-== Dockerfile Position
 
 == Dockerfile Setup für die GitHub Actions Pipeline
 
@@ -61,14 +60,39 @@ Im Schritt für das Erstellen und Veröffentlichen des Docker-Images wird `DOCKE
 Beispiel für den `maven`-Schritt, der das Kopieren ausführt:
 
 
-== Setup k8s
+== Leocloud Setup
 
-Bevor man mit
+Für dieses Projekt ist der Zugriff auf die Leocloud-Umgebung erforderlich, um die Kubernetes-Deployment-Funktionen nutzen zu können. Bitte folge den Anweisungen im offiziellen Benutzerhandbuch, um die Leocloud korrekt einzurichten:
 
-== k8s file
+Link zur Anleitung: https://cloud.htl-leonding.ac.at/
+
+=== Schritte zur Einrichtung
+
+1. **Zugang zur Leocloud**
+Öffne die Anleitung und folge den Schritten zur Registrierung und Anmeldung, falls du noch keinen Account hast.
+
+2. **Grundlegende Einrichtung**
+Befolge die Schritte zur Installation und Konfiguration der notwendigen Tools für den Zugriff auf die Leocloud. Stelle sicher, dass du über die entsprechenden Rechte und die Konfiguration für den Zugriff auf die Kubernetes-Umgebung verfügst.
+
+3. **Verbindungstest**
+Teste, ob die Verbindung zur Leocloud erfolgreich hergestellt werden kann, indem du die in der Anleitung beschriebenen Schritte ausführst.
+
+Nach Abschluss dieser Einrichtung solltest du die Leocloud vollständig nutzen können, um Deployments im Rahmen des Projekts durchzuführen. Vergewissere dich, dass die `kubectl` Konfigurationsdatei die korrekten Werte enthält. Du kannst dies überprüfen, indem du den Befehl `kubectl config view` ausführst.
 
 
-== env variables of the workflows
+== Weitere wichtige Umgebungsvariablen in den Workflows
+
+In den GitHub Actions Workflows (`build.yaml` und `release-artifacts.yaml`) werden verschiedene Umgebungsvariablen (`env`) verwendet, um die Pipeline-Anforderungen und die Projektkonfiguration zu steuern. Dazu gehören Variablen wie die Java-Version und die Java-Distribution, die für den Build und das Deployment festgelegt werden können. Beispiele dafür sind:
+
+[source,yaml]
+----
+env:
+  JAVA_VERSION: '21'
+  JAVA_DISTRIBUTION: 'temurin'
+----
+
+Diese Variablen (`JAVA_VERSION` und `JAVA_DISTRIBUTION`) sorgen dafür, dass beide Workflows mit der gewünschten Java-Version und Distribution ausgeführt werden, wodurch eine konsistente Umgebung gewährleistet wird. Du kannst diese Werte in den Dateien `build.yaml` und `release-artifacts.yaml` nach Bedarf anpassen.
+
 
 == kubectl config
 
